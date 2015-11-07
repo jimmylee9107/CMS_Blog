@@ -12,14 +12,27 @@
             <div class="col-md-8">
 
                 <?php
-                $query = "SELECT * FROM posts ";
-                $result = mysqli_query($connection, $query);
-                while($row = mysqli_fetch_assoc($result)) {
-                    $post_title = $row['post_title'];
-                    $post_author = $row['post_author'];
-                    $post_date = $row['post_date'];
-                    $post_image = $row['post_image'];
-                    $post_content = $row['post_content'];
+                 if (isset($_POST['submit'])) {
+                     $search = $_POST['search'];
+                     $search = mysqli_real_escape_string($connection, $search);
+                     $query = "SELECT * FROM posts ";
+                     $query .= "WHERE post_tags LIKE '%$search%' ";
+                     $result = mysqli_query($connection, $query);
+                     if (!$result) {
+                         die("Query failed" . mysqli_error($connection));
+                     }
+                     $count = mysqli_num_rows($result);
+
+                     if ($count == 0) {
+                         echo "<h1>Result no found</h1>";
+                     } else {
+
+                        while($row = mysqli_fetch_assoc($result)) {
+                            $post_title = $row['post_title'];
+                            $post_author = $row['post_author'];
+                            $post_date = $row['post_date'];
+                            $post_image = $row['post_image'];
+                            $post_content = $row['post_content'];
 
                     ?>
                  <h1 class="page-header">
@@ -45,9 +58,10 @@
 
         <?php
                 }
+
+                }
+                  }
                 ?>
-
-
             </div>
 
             <!-- Blog Sidebar Widgets Column -->
