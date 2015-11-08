@@ -12,8 +12,11 @@
             <div class="col-md-8">
 
                 <?php
-                $query = "SELECT * FROM posts ";
+                $query = "SELECT * FROM posts WHERE post_status = 'published' ";
                 $result = mysqli_query($connection, $query);
+                if ($result->num_rows == 0) {
+                    echo "<h1>No post sorry</h1>";
+                } else {
                 while($row = mysqli_fetch_assoc($result)) {
                     $post_id = $row['post_id'];
                     $post_title = $row['post_title'];
@@ -21,6 +24,9 @@
                     $post_date = $row['post_date'];
                     $post_image = $row['post_image'];
                     $post_content = substr($row['post_content'], 0, 50);
+                    $post_status = $row['post_status'];
+
+
 
                 ?>
                  <h1 class="page-header">
@@ -45,6 +51,7 @@
                 <hr>
 
         <?php
+                }
                 }
                 ?>
 
