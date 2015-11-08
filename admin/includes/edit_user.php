@@ -36,11 +36,17 @@ if (isset($_POST['edit_user'])) {
 
 //    move_uploaded_file($post_image_temp, "../images/$post_image");
 //
-    $query = "INSERT INTO users (user_firstname, user_lastname, user_role, user_name, user_email, user_password) ";
-    $query .= "VALUES ('{$user_firstname}', '{$user_lastname}', '{$user_role}', '{$user_name}', '{$user_email}', '{$user_password}' ) ";
-    $create_user_query = mysqli_query($connection, $query);
+    $query = "UPDATE users SET ";
+    $query .= "user_firstname = '{$user_firstname}', ";
+    $query .= "user_lastname = '{$user_lastname}', ";
+    $query .= "user_role = '{$user_role}' , ";
+    $query .= "user_name = '{$user_name}', ";
+    $query .= "user_email = '{$user_email}', ";
+    $query .= "user_password = '{$user_password}' ";
+    $query .= "WHERE user_id = '{$the_user_id}' ";
 
-    confirmQuery($create_user_query);
+    $edit_user_query = mysqli_query($connection, $query);
+    confirmQuery($edit_user_query);
 }
 
 ?>
@@ -58,9 +64,17 @@ if (isset($_POST['edit_user'])) {
 
      <div class="form-group">
        <select name="user_role" id="">
-        <option value='subscriber'>Select Options</option>
-        <option value='admin'>Admin</option>
-        <option value='subscriber'>Subscriber</option>
+        <option value='subscriber'><?php echo $user_role;?></option>
+        <?php
+        if($user_role == 'admin') {
+            echo "        <option value='subscriber'>subscriber</option>";
+        } else {
+            echo "<option value='admin'>admin</option>";
+        }
+
+        ?>
+        
+
 
        </select>
     </div>
@@ -92,7 +106,7 @@ if (isset($_POST['edit_user'])) {
 
 
      <div class="form-group">
-        <input class="btn btn-primary" type="submit"  name="edit_user" value="Add user">
+        <input class="btn btn-primary" type="submit"  name="edit_user" value="Update user">
     </div>
 
 
