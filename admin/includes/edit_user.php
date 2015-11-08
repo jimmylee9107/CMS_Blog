@@ -1,6 +1,19 @@
 <?php
 if(isset($_GET['edit_user'])) {
     $the_user_id = $_GET['edit_user'];
+
+    $query = "SELECT * FROM users WHERE user_id = $the_user_id";
+    $select_users = mysqli_query($connection, $query);
+    while($row = mysqli_fetch_assoc($select_users)) {
+        $user_id = $row['user_id'];
+        $user_name = $row['user_name'];
+        $user_password = $row['user_password'];
+        $user_firstname = $row['user_firstname'];
+        $user_lastname = $row['user_lastname'];
+        $user_email = $row['user_email'];
+        $user_image = $row['user_image'];
+        $user_role = $row['user_role'];
+    }
 }
 
 
@@ -35,12 +48,12 @@ if (isset($_POST['edit_user'])) {
 
     <div class="form-group">
         <label for="title">Firstname</label>
-        <input type="text" class="form-control" name="user_firstname">
+        <input type="text" class="form-control" name="user_firstname" value="<?php echo $user_firstname;?>">
     </div>
 
      <div class="form-group">
         <label for="title">Lastname</label>
-        <input type="text" class="form-control" name="user_lastname">
+        <input type="text" class="form-control" name="user_lastname" value="<?php echo $user_lastname;?>">
     </div>
 
      <div class="form-group">
@@ -63,17 +76,17 @@ if (isset($_POST['edit_user'])) {
 
      <div class="form-group">
         <label for="title">Username</label>
-        <input type="text" class="form-control" name="user_name">
+        <input type="text" class="form-control" name="user_name" value="<?php echo $user_name;?>">
     </div>
 
      <div class="form-group">
         <label for="title">Email</label>
-        <input type="email" name="user_email" class="form-control">
+        <input type="email" name="user_email" class="form-control" value="<?php echo $user_email;?>">
     </div>
 
      <div class="form-group">
         <label for="title">Password</label>
-        <input type="password" class="form-control" name="user_password">
+        <input type="password" class="form-control" name="user_password" value="<?php echo $user_password;?>">
     </div>
 
 
