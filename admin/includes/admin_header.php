@@ -7,7 +7,7 @@
 if (isset($_SESSION['user_role'])) {
 
 } else {
-    //header("location: ../index.php");
+    header("location: ../index.php");
 }
 
 

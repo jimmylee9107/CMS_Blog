@@ -18,7 +18,6 @@ if(isset($_GET['edit_user'])) {
 
 
 
-
 if (isset($_POST['edit_user'])) {
 //    $user_id = $_POST['user_id'];
     $user_firstname = $_POST['user_firstname'];
@@ -108,17 +107,6 @@ if (isset($_POST['edit_user'])) {
      <div class="form-group">
         <input class="btn btn-primary" type="submit"  name="edit_user" value="Update user">
     </div>
-
-
-
-
-
-
-
-
-
-
-
 
 
 
